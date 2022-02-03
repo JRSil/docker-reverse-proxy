@@ -6,12 +6,9 @@ services:
     build:
       context: node
     container_name: app
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
-    command: node index.js
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s node index.js
     networks:
       - node-network
-    volumes:
-      - ./node:/usr/src/app
     tty: true
     ports:
       - "3000:3000"
@@ -33,16 +30,16 @@ services:
       - node-network
 
   nginx:
-    image: nginx:1.15.0-alpine
+    build: 
+      context: nginx
     container_name: nginx
     restart: unless-stopped
     ports:
       - "8080:80"
-    volumes:
-      - web-root:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
     networks:
       - node-network
+    depends_on:
+      - app
 
 networks:
   node-network:

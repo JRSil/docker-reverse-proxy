@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+		<head>
+			<meta charset="utf-8"/>
+			<title>Full Cycle</title>
+		</head>
+	<body>
+
+		<h1>Full Cycle!!</h1>
+		<table>
+			<tr>
+				<td>Nome</td>
+			</tr>
+			<% for(var i = 0; i < people.length; i++) { %>
+				<tr>
+					<td><%= people[i].name %></td>
+				</tr>
+			<% } %>
+		</table>
+
+	</body>
+</html>
